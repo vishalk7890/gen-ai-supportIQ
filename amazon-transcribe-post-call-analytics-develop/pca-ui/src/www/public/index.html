@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#4A90E2" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1A1A2E" media="(prefers-color-scheme: dark)" />
+
+    <!-- Page Title -->
+    <title>Post Call Analysis | Insightful Call Reviews</title>
+
+    <!-- Favicon & Apple Touch Icon -->
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/apple-touch-icon.png" sizes="180x180" />
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <!-- Description & SEO -->
+    <meta
+      name="description"
+      content="Analyze customer calls with AI-powered insights. Improve service quality, detect sentiment, and generate summaries instantly."
+    />
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:title" content="Post Call Analysis" />
+    <meta property="og:description" content="AI-powered call analysis for better customer insights." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourapp.com" />
+    <meta property="og:image" content="%PUBLIC_URL%/social-preview.jpg" />
+    <meta property="og:image:alt" content="Post Call Analysis Dashboard Preview" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Post Call Analysis" />
+    <meta name="twitter:description" content="Get instant insights from customer calls using AI." />
+    <meta name="twitter:image" content="%PUBLIC_URL%/social-preview.jpg" />
+
+    <!-- Preload Critical Config -->
+    <link rel="preload" as="script" href="%PUBLIC_URL%/config.js" />
+
+    <!-- Base URL -->
+    <base href="/" />
+
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Post Call Analysis",
+      "description": "AI-powered tool for analyzing customer service calls.",
+      "url": "https://yourapp.com",
+      "applicationCategory": "BusinessApplication"
+    }
+    </script>
+  </head>
+
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this powerful call analysis application.
+    </noscript>
+    <div id="root"></div>
+
+    <!-- Load app config -->
+    <script src="%PUBLIC_URL%/config.js"></script>
+
+    <!--
+      This is the root container for your React app.
+      The build tool (Webpack, Vite, etc.) will inject bundled JS here.
+      For PWA support, ensure manifest.json and icons are in the /public folder.
+    -->
+  </body>
+</html>
