@@ -78,13 +78,7 @@ function Home({ setAlert }) {
             </Header>
         }>
         <Container>
-          <Grid
-            gridDefinition={[
-              {colspan: { default:12} },
-              {colspan: { default:12} },
-              {colspan: { default:12} }
-            ]}
-          >
+          <SpaceBetween size="l">
             <ExpandableSection headerText="Upload call recordings">
                 <Upload/>
             </ExpandableSection>
@@ -93,18 +87,20 @@ function Home({ setAlert }) {
               loading={!data && !error}
               empty={<Empty />}
             />
-            <Button
-              variant="primary"
-              onClick={() => setSize(size + 1)}
-              disabled={isLoadingMore || isReachingEnd}
-            >
-              {isLoadingMore
-                ? "Loading..."
-                : isReachingEnd
-                ? "No more to load"
-                : "Load more"}
-            </Button>
-          </Grid>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Button
+                variant="primary"
+                onClick={() => setSize(size + 1)}
+                disabled={isLoadingMore || isReachingEnd}
+              >
+                {isLoadingMore
+                  ? "Loading..."
+                  : isReachingEnd
+                  ? "No more to load"
+                  : "Load more"}
+              </Button>
+            </div>
+          </SpaceBetween>
         </Container>
         
       </ContentLayout>

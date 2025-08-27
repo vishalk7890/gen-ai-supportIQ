@@ -31,7 +31,8 @@ async function request(url, method, body) {
   console.debug("Response:", response);
 
   if (response.status === 403 || response.status === 401) {
-    return auth.redirectToLogin("Unathenticated.");
+    // Avoid redirect loop; surface error to UI so user can re-login via button
+    throw new Error(`Unauthorized (${response.status})`);
   }
 
   if (response.status !== 200) {

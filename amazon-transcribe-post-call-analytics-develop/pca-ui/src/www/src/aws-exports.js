@@ -1,5 +1,5 @@
 // src/aws-exports.js
-export default {
+const awsConfig = {
   aws_project_region: 'us-east-1',
   aws_cognito_region: 'us-east-1',
   aws_user_pools_id: 'us-east-1_kmixUr4yq', // e.g., us-east-1_abc123xyz
@@ -12,3 +12,5 @@ export default {
     responseType: 'code', // or 'token' depending on flow
   },
 };
+
+export default awsConfig;

@@ -52,8 +52,8 @@
 
 ///new one
 import React, { useState } from "react";
-
-import { Auth } from "@aws-amplify/auth";
+import { signIn as amplifySignIn, fetchAuthSession } from "aws-amplify/auth";
+import "./Login.css";
 
 export default function Login({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -64,11 +64,15 @@ export default function Login({ onLogin }) {
     e.preventDefault();
     setError("");
     try {
-      const user = await Auth.signIn(username, password);
-      const session = await Auth.currentSession();
-      const idToken = session.getIdToken().getJwtToken();
-      localStorage.setItem("id_token", idToken);
-      onLogin(user); // callback to parent App
+      await amplifySignIn({ username, password });
+      const session = await fetchAuthSession();
+      const idToken = session.tokens?.idToken?.toString();
+      const accessToken = session.tokens?.accessToken?.toString();
+      const refreshToken = session.tokens?.refreshToken?.toString();
+      if (idToken) localStorage.setItem("id_token", idToken);
+      if (accessToken) localStorage.setItem("access_token", accessToken);
+      if (refreshToken) localStorage.setItem("refresh_token", refreshToken);
+      onLogin({ username });
     } catch (err) {
       console.error(err);
       setError(err.message || "Login failed");
@@ -78,8 +82,11 @@ export default function Login({ onLogin }) {
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-box">
-        <h2>Gen-AI SupportIQ</h2>
-        <p className="subtitle">Sign in to access insights</p>
+        <div className="brand-title" style={{display:'flex',alignItems:'center',justifyContent:'center',gap:12}}>
+          <img alt="SupportIQ" src="/images/pcaui-local.png" width="28" height="28" style={{borderRadius:6}} />
+          <span>gen-ai-supportIQ</span>
+        </div>
+        <p className="subtitle">Sign in to access intelligent call insights</p>
         {error && <div className="error-message">{error}</div>}
         <div className="form-group">
           <label>Username</label>
@@ -87,6 +94,7 @@ export default function Login({ onLogin }) {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            placeholder="you@example.com"
             required
           />
         </div>
@@ -96,10 +104,12 @@ export default function Login({ onLogin }) {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="••••••••"
             required
           />
         </div>
         <button className="login-button" type="submit">Sign In</button>
+        <p className="footer-text">© 2025 gen-ai-supportIQ</p>
       </form>
     </div>
   );

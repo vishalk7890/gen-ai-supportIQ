@@ -167,7 +167,19 @@ const webUri = `${window.location.protocol}//${window.location.host}/`;
 
 export function redirectToLogin(message, err) {
   console.debug("Redirect to login:", message, err);
-  window.location.href = "/login";
+  // Prefer Cognito hosted UI when configured
+  if (config?.auth?.uri && config?.auth?.clientId) {
+    const loginUrl = `${config.auth.uri}/login?client_id=${encodeURIComponent(config.auth.clientId)}&response_type=code&redirect_uri=${encodeURIComponent(webUri)}`;
+    window.location.href = loginUrl;
+  } else {
+    window.location.href = "/login";
+  }
+}
+
+export function hostedLoginRedirect() {
+  if (!config?.auth?.uri || !config?.auth?.clientId) return;
+  const loginUrl = `${config.auth.uri}/login?client_id=${encodeURIComponent(config.auth.clientId)}&response_type=code&redirect_uri=${encodeURIComponent(webUri)}`;
+  window.location.href = loginUrl;
 }
 
 export function payloadFromToken(token) {
@@ -207,7 +219,8 @@ export async function refreshToken() {
 
 // ✅ Return valid token
 export async function getToken() {
-  let token = localStorage.getItem("access_token");
+  // Prefer ID token for API Gateway Cognito authorizer; fall back to access token
+  let token = localStorage.getItem("id_token") || localStorage.getItem("access_token");
   if (!token) return null;
 
   try {

@@ -234,9 +234,11 @@ function Search({ setAlert }) {
           </FormField>
 
 
-          <Button bg={"primary"} onClick={onClick}>
+          <div style={{ display: 'flex', gap: 12 }}>
+            <Button variant="primary" onClick={onClick}>
             Search
-          </Button>
+            </Button>
+          </div>
             
           <hr/>
         </SpaceBetween>
