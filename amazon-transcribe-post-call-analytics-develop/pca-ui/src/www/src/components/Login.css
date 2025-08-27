@@ -3,34 +3,36 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: linear-gradient(135deg, #4A90E2 0%, #1A1A2E 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .login-box {
-  background: white;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  padding: 50px 40px;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   text-align: center;
+  animation: fadeIn 0.5s ease;
 }
 
-.login-box h2 {
+.brand-title {
+  font-size: 28px;
+  font-weight: 700;
   color: #4A90E2;
-  margin: 0 0 8px 0;
-  font-size: 24px;
+  margin-bottom: 12px;
 }
 
 .subtitle {
+  font-size: 16px;
   color: #666;
-  font-size: 14px;
-  margin-bottom: 24px;
+  margin-bottom: 30px;
 }
 
 .form-group {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   text-align: left;
 }
 
@@ -44,30 +46,31 @@
 
 .form-group input {
   width: 100%;
-  padding: 10px 12px;
+  padding: 12px 14px;
   border: 1px solid #ddd;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 14px;
-  transition: border 0.2s ease;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-group input:focus {
-  outline: none;
   border-color: #4A90E2;
-  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+  outline: none;
 }
 
 .login-button {
   background-color: #4A90E2;
   color: white;
   border: none;
-  padding: 12px;
+  padding: 14px;
   width: 100%;
   font-size: 16px;
   font-weight: 600;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  margin-top: 8px;
+  margin-top: 12px;
+  transition: background 0.3s ease;
 }
 
 .login-button:hover {
@@ -75,7 +78,7 @@
 }
 
 .error-message {
-  background-color: #ffebee;
+  background-color: #ffe6e6;
   color: #c62828;
   padding: 10px;
   border-radius: 6px;
@@ -85,7 +88,7 @@
 }
 
 .footer-text {
-  margin-top: 16px;
+  margin-top: 20px;
   font-size: 14px;
   color: #666;
 }
@@ -97,4 +100,9 @@
 
 .footer-text a:hover {
   text-decoration: underline;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }

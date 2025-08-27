@@ -1,85 +1,83 @@
-// import {
-//   BrowserRouter as Router,
-//   Switch,
-//   Route,
-//   NavLink,
-// } from "react-router-dom";
-// // import { Navbar, Nav, Container, Alert, Button } from "react-bootstrap";
-// import { AppLayout,Alert,Notifications, Header, Link, BreadcrumbGroup, TopNavigation, Container, Button} from "@cloudscape-design/components"
+// // src/App.js
+// import React, { useState, useEffect } from "react";
+// import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+// import { AppLayout, Alert, BreadcrumbGroup, TopNavigation } from "@cloudscape-design/components";
 // import Home from "./routes/Home";
 // import Search from "./routes/Search";
 // import Dashboard from "./routes/Dashboard/index";
-// import { useState } from "react";
+// import Login from "./components/Login";
 // import { payloadFromToken, logOut } from "./api/auth";
 
+// // Routes configuration
 // const routes = [
 //   {
 //     path: "/search",
 //     name: "Search",
 //     Component: Search,
-//     Breadcrumb: () => {
-//       return <BreadcrumbGroup
+//     Breadcrumb: () => (
+//       <BreadcrumbGroup
 //         items={[
-//           { text: "Home", href: "../" },
-//           { text: "Search", href: "search" }
+//           { text: "Home", href: "/" },
+//           { text: "Search", href: "/search" },
 //         ]}
 //         ariaLabel="Breadcrumbs"
 //       />
-//     }
+//     ),
 //   },
 //   {
 //     path: "/dashboard/parsedFiles/search",
 //     name: "Search",
 //     Component: Search,
-//     Breadcrumb: () => {
-//       return <BreadcrumbGroup
+//     Breadcrumb: () => (
+//       <BreadcrumbGroup
 //         items={[
-//           { text: "Home", href: "../" },
-//           { text: "Search", href: "search" }
+//           { text: "Home", href: "/" },
+//           { text: "Search", href: "/search" },
 //         ]}
 //         ariaLabel="Breadcrumbs"
 //       />
-//     }
+//     ),
 //   },
 //   {
 //     path: "/dashboard/:key*",
 //     name: "Call Details",
 //     hide: true,
 //     Component: Dashboard,
-//     Breadcrumb: () => {
-//       return <BreadcrumbGroup
+//     Breadcrumb: () => (
+//       <BreadcrumbGroup
 //         items={[
-//           { text: "Home", href: "../../" },
-//           { text: "Call List", href: "../../" },
+//           { text: "Home", href: "/" },
+//           { text: "Call List", href: "/" },
 //           { text: "Call Details", href: "#" },
 //         ]}
 //         ariaLabel="Breadcrumbs"
 //       />
-//     }
+//     ),
 //   },
 //   {
 //     path: "/",
 //     name: "Call List",
 //     Component: Home,
-//     Breadcrumb: () => {
-//       return <BreadcrumbGroup
+//     Breadcrumb: () => (
+//       <BreadcrumbGroup
 //         items={[
 //           { text: "Home", href: "#" },
 //           { text: "Call List", href: "#" },
 //         ]}
 //         ariaLabel="Breadcrumbs"
 //       />
-//     }
+//     ),
 //   },
 // ];
 
+// // Top Navigation
 // function Navigation({ userName, email }) {
 //   return (
 //     <TopNavigation
 //       identity={{
 //         href: "/",
 //         title: "Amazon Transcribe Post-Call Analytics",
-//         iconName: "settings"
+//         iconName: "settings",
 //       }}
 //       i18nStrings={{
 //         searchIconAriaLabel: "Search",
@@ -87,106 +85,102 @@
 //         overflowMenuTriggerText: "More",
 //         overflowMenuTitleText: "All",
 //         overflowMenuBackIconAriaLabel: "Back",
-//         overflowMenuDismissIconAriaLabel: "Close menu"
+//         overflowMenuDismissIconAriaLabel: "Close menu",
 //       }}
 //       utilities={[
-//         {
-//           type: "button",
-//           text: "Search",
-//           iconName: "search",
-//           href: "search",
-//           externalIconAriaLabel: " (opens in a new tab)"
-//         },
-//         {
-//           type: "button",
-//           text: "PCA Blog Post",
-//           href: "https://amazon.com/post-call-analytics",
-//           external: true,
-//           externalIconAriaLabel: " (opens in a new tab)"
-//         },
+//         { type: "button", text: "Search", iconName: "search", href: "/search" },
+//         { type: "button", text: "PCA Blog Post", href: "https://amazon.com/post-call-analytics", external: true },
 //         {
 //           type: "menu-dropdown",
 //           text: userName,
 //           description: email,
 //           iconName: "user-profile",
-//           onItemClick: (event) => {
-//             console.log(event);
-//             if (event.detail.id === "signout") logOut();
+//           onItemClick: ({ detail }) => {
+//             if (detail.id === "signout") logOut();
 //           },
 //           items: [
-//             /* { id: "profile", text: "Profile" },
-//             { id: "preferences", text: "Preferences" },
-//             { id: "security", text: "Security" },*/
 //             {
 //               id: "support-group",
 //               text: "Support",
 //               items: [
-//                 {
-//                   id: "documentation",
-//                   text: "GitHub/Readme",
-//                   href: "https://github.com/aws-samples/amazon-transcribe-post-call-analytics/",
-//                   external: true,
-//                   externalIconAriaLabel:
-//                     " (opens in new tab)"
-//                 },
-//                 {
-//                   id: "feedback",
-//                   text: "Blog Post",
-//                   href: "https://amazon.com/post-call-analytics",
-//                   external: true,
-//                   externalIconAriaLabel:
-//                     " (opens in new tab)"
-//                 }
-//               ]
+//                 { id: "documentation", text: "GitHub / Readme", href: "https://github.com/aws-samples/amazon-transcribe-post-call-analytics/", external: true },
+//                 { id: "feedback", text: "Blog Post", href: "https://amazon.com/post-call-analytics", external: true },
+//               ],
 //             },
-//             { id: "signout", text: "Sign out" }
-//           ]
-//         }
-
+//             { id: "signout", text: "Sign out" },
+//           ],
+//         },
 //       ]}
 //     />
 //   );
 // }
 
-// function App() {
+// // Protected Route wrapper
+// function ProtectedRoute({ children }) {
+//   const [isAuth, setIsAuth] = useState(null);
+
+//   useEffect(() => {
+//     const token = localStorage.getItem("id_token");
+//     if (!token) {
+//       setIsAuth(false);
+//       return;
+//     }
+//     try {
+//       payloadFromToken(token); // Throws if invalid
+//       setIsAuth(true);
+//     } catch {
+//       setIsAuth(false);
+//     }
+//   }, []);
+
+//   if (isAuth === null) return null; // Optionally show spinner here
+//   if (!isAuth) return <Redirect to="/login" />;
+//   return children;
+// }
+
+// // Main App
+// export default function App() {
 //   const [alert, setAlert] = useState();
+//   const onDismiss = () => setAlert(null);
 
-//   const onDismiss = () => {
-//     setAlert(null);
-//   };
-
+//   // Safely parse user token
 //   const userToken = localStorage.getItem("id_token");
-//   const parsedToken = payloadFromToken(userToken);
-//   const cognitoUserName = parsedToken["cognito:username"] || "Unknown";
-//   const cognitoEmail = parsedToken["email"] || "Unknown";
+//   let cognitoUserName = "Unknown";
+//   let cognitoEmail = "Unknown";
+//   if (userToken) {
+//     try {
+//       const parsedToken = payloadFromToken(userToken);
+//       cognitoUserName = parsedToken["cognito:username"] || "Unknown";
+//       cognitoEmail = parsedToken["email"] || "Unknown";
+//     } catch (err) {
+//       console.error("Invalid token:", err);
+//     }
+//   }
 
 //   return (
 //     <Router>
 //       <Switch>
-//         {routes.map(({ path, Component, Breadcrumb, name }) => (
-//           <Route key={path} path={path}>
-//             <Navigation userName={cognitoUserName} email={cognitoEmail} />
-//             <AppLayout
-//               stickyNotifications
-//               toolsHide
-//               navigationHide
-//               breadcrumbs={
-//                 <Breadcrumb/>
-//               }
-//               notifications={alert && (
-//                 <Alert
-//                   variant={alert.variant}
-//                   dismissible
-//                   header={alert.heading}
-//                   onDismiss={onDismiss}
-//                 >
-//                   {alert.text}
-//                 </Alert>
-//               )}
-//               content={
-//                 <Component setAlert={setAlert} />
-//               }
-//             />
+//         {/* Custom Login Page */}
+//         <Route path="/login" component={Login} />
+
+//         {/* Protected Routes */}
+//         {routes.map(({ path, Component, Breadcrumb }) => (
+//           <Route key={path} path={path} exact>
+//             <ProtectedRoute>
+//               <Navigation userName={cognitoUserName} email={cognitoEmail} />
+//               <AppLayout
+//                 stickyNotifications
+//                 toolsHide
+//                 navigationHide
+//                 breadcrumbs={<Breadcrumb />}
+//                 notifications={alert && (
+//                   <Alert variant={alert.variant} dismissible header={alert.heading} onDismiss={onDismiss}>
+//                     {alert.text}
+//                   </Alert>
+//                 )}
+//                 content={<Component setAlert={setAlert} />}
+//               />
+//             </ProtectedRoute>
 //           </Route>
 //         ))}
 //       </Switch>
@@ -194,198 +188,41 @@
 //   );
 // }
 
-// export default App;
 
 
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
 
-// Cloudscape Components
-import {
-  AppLayout,
-  Alert,
-  BreadcrumbGroup,
-  TopNavigation,
-} from "@cloudscape-design/components";
+//new
 
-// Pages
+import React, { useState, useEffect } from "react";
+import Login from "./components/Login";
 import Home from "./routes/Home";
-import Search from "./routes/Search";
-import Dashboard from "./routes/Dashboard/index";
+import { Auth } from "@aws-amplify/auth";
 
-// Auth
-import { useState } from "react";
-import { payloadFromToken, logOut } from "./api/auth";
-
-// ==============================
-// Route Definitions
-// ==============================
-
-const routes = [
-  {
-    path: "/",
-    name: "Call List",
-    Component: Home,
-    Breadcrumb: () => (
-      <BreadcrumbGroup
-        items={[
-          { text: "Home", href: "#" },
-          { text: "Call List", href: "#" },
-        ]}
-        ariaLabel="Breadcrumbs"
-      />
-    ),
-  },
-  {
-    path: "/search",
-    name: "Search",
-    Component: Search,
-    Breadcrumb: () => (
-      <BreadcrumbGroup
-        items={[
-          { text: "Home", href: "/" },
-          { text: "Search", href: "/search" },
-        ]}
-        ariaLabel="Breadcrumbs"
-      />
-    ),
-  },
-  {
-    path: "/dashboard/:key*",
-    name: "Call Details",
-    hide: true,
-    Component: Dashboard,
-    Breadcrumb: () => (
-      <BreadcrumbGroup
-        items={[
-          { text: "Home", href: "/" },
-          { text: "Call List", href: "/" },
-          { text: "Call Details", href: "#" },
-        ]}
-        ariaLabel="Breadcrumbs"
-      />
-    ),
-  },
-];
-
-// ==============================
-// Top Navigation
-// ==============================
-
-function Navigation({ userName, email }) {
-  return (
-    <TopNavigation
-      identity={{
-        href: "/",
-        title: "Amazon Transcribe Post-Call Analytics",
-        iconName: "settings",
-      }}
-      i18nStrings={{
-        searchIconAriaLabel: "Search",
-        searchDismissIconAriaLabel: "Close search",
-        overflowMenuTriggerText: "More",
-        overflowMenuTitleText: "All",
-        overflowMenuBackIconAriaLabel: "Back",
-        overflowMenuDismissIconAriaLabel: "Close menu",
-      }}
-      utilities={[
-        {
-          type: "button",
-          text: "Search",
-          iconName: "search",
-          href: "/search",
-        },
-        {
-          type: "button",
-          text: "PCA Blog Post",
-          href: "https://amazon.com/post-call-analytics",
-          external: true,
-        },
-        {
-          type: "menu-dropdown",
-          text: userName,
-          description: email,
-          iconName: "user-profile",
-          onItemClick: ({ detail }) => {
-            if (detail.id === "signout") logOut();
-          },
-          items: [
-            {
-              id: "support-group",
-              text: "Support",
-              items: [
-                {
-                  id: "documentation",
-                  text: "GitHub / Readme",
-                  href: "https://github.com/aws-samples/amazon-transcribe-post-call-analytics/",
-                  external: true,
-                },
-                {
-                  id: "feedback",
-                  text: "Blog Post",
-                  href: "https://amazon.com/post-call-analytics",
-                  external: true,
-                },
-              ],
-            },
-            { id: "signout", text: "Sign out" },
-          ],
-        },
-      ]}
-    />
-  );
-}
-
-// ==============================
-// Main App
-// ==============================
 
 export default function App() {
-  const [alert, setAlert] = useState();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const onDismiss = () => setAlert(null);
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const currentUser = await Auth.currentAuthenticatedUser();
+        setUser(currentUser);
+      } catch {
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    checkUser();
+  }, []);
 
-  const userToken = localStorage.getItem("id_token");
-  const parsedToken = payloadFromToken(userToken);
-  const cognitoUserName = parsedToken["cognito:username"] || "Unknown";
-  const cognitoEmail = parsedToken["email"] || "Unknown";
+  if (loading) return <div>Loading...</div>;
 
-  return (
-    <Router>
-      <Navigation userName={cognitoUserName} email={cognitoEmail} />
-      <Routes>
-        {routes.map(({ path, Component, Breadcrumb }) => (
-          <Route
-            key={path}
-            path={path}
-            element={
-              <AppLayout
-                stickyNotifications
-                toolsHide
-                navigationHide
-                breadcrumbs={<Breadcrumb />}
-                notifications={
-                  alert && (
-                    <Alert
-                      variant={alert.variant}
-                      dismissible
-                      header={alert.heading}
-                      onDismiss={onDismiss}
-                    >
-                      {alert.text}
-                    </Alert>
-                  )
-                }
-                content={<Component setAlert={setAlert} />}
-              />
-            }
-          />
-        ))}
-      </Routes>
-    </Router>
-  );
+  if (!user) {
+    return <Login onLogin={(u) => setUser(u)} />;
+  }
+
+  return <Home />; // Your main app routes here
 }

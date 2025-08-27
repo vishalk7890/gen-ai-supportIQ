@@ -3,9 +3,10 @@
   "version": "0.2.0",
   "private": true,
   "dependencies": {
-    "@aws-amplify/auth": "^6.15.0",
+    "@aws-amplify/auth": "^5.6.15",
     "@cloudscape-design/components": "^3.0.293",
     "@cloudscape-design/global-styles": "^1.0.9",
+    "aws-amplify": "^6.15.5",
     "aws-sdk": "^2.1620.0",
     "axios": "^1.8.2",
     "bootstrap": "5.1.1",
